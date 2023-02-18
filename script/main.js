@@ -6,40 +6,6 @@
 // this is a 1 to many connection to an element in the DOM
 // the variable name is the "basket"
 let navButtons = document.querySelectorAll('#buttonHolder img'),
-    theHeadline = document.querySelector('#headLine h1'),
-	// collect draggable pieces
-	puzzlePieces = document.querySelectorAll('.puzzle-pieces img'),
-	dropZones = document.querySelectorAll('.drop-zone'),
-	puzzleBoard = document.querySelector('.puzzle-board'),
-	templink = document.querySelector('a'),
-	// set up a global variable to store a reference to the dragged piece
-	// i need to move this later when i drop it on a zone
-	draggedPiece;
-
-
-// function goes in the middle
-// these are the "actions" that should happen
-function resetPuzzlePieces() {
-	// remove all puzzle pieces from drop zones and append them to puzzle-pieces
-	dropZones.forEach(zone => {
-		if (zone.children.length > 0) {
-			document.querySelector('.puzzle-pieces').appendChild(zone.children[0]);
-		}
-	});
-}
-
-function changeBgImage() {
-    // remove any puzzle pieces from the drop zones and reparent them to the drag zone
-    resetPuzzlePieces();
-
-    // change the background image in the drop zone
-    puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
-}
-  
-
-function handleStartDrag() { 
-	// store the element I am currently dragging in that global draggedPiece variable
-	draggedPiece = this;
 }
 
 function handleDragOver(e) { e.preventDefault(); }
