@@ -12,24 +12,30 @@ let navButtons = document.querySelectorAll('#buttonHolder img'),
 	dropZones = document.querySelectorAll('.drop-zone'),
 	puzzleBoard = document.querySelector('.puzzle-board'),
 	templink = document.querySelector('a'),
-	// set up a global variable to store a reference ti tge dragged piece
-	// i need ti jvoe this later when i drop it on a zone
+	// set up a global variable to store a reference to the dragged piece
+	// i need to move this later when i drop it on a zone
 	draggedPiece;
 
 
-// function go in the middle
+// function goes in the middle
 // these are the "actions" that should happen
-function changeBgImage() {
-	
-	// // object.property = "new value"
-	// // theHeadline.textContent = "Drag and Drop is funny";
-	// // theHeadline.classList.add("orange-headline");
-
-	// let newBGPath = "images/backGround" + this.id + ".jpg";
-	// // debugger;
-	// // change the background image in the drop zone
-	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
+function resetPuzzlePieces() {
+	// remove all puzzle pieces from drop zones and append them to puzzle-pieces
+	dropZones.forEach(zone => {
+		if (zone.children.length > 0) {
+			document.querySelector('.puzzle-pieces').appendChild(zone.children[0]);
+		}
+	});
 }
+
+function changeBgImage() {
+    // remove any puzzle pieces from the drop zones and reparent them to the drag zone
+    resetPuzzlePieces();
+
+    // change the background image in the drop zone
+    puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
+}
+  
 
 function handleStartDrag() { 
 	// store the element I am currently dragging in that global draggedPiece variable
@@ -41,10 +47,16 @@ function handleDragOver(e) { e.preventDefault(); }
 function handleDrop(e) {
 	// block the default behaviour 
 	e.preventDefault();
-	// and then do whatever you want.
-	console.log('dropped on me!');
+  
+	// if there is already a puzzle piece in the drop zone, remove it before adding the new piece
+	if (e.target.children.length > 0) {
+		// if a puzzle piece is already in the drop zone, add it back to the puzzle pieces
+		document.querySelector('.puzzle-pieces').appendChild(e.target.children[0]);
+	}
+  
+	// append the dragged piece to the drop zone
 	e.target.appendChild(draggedPiece);
-}
+}  
 
 
 // event handling at the bottom -> how things react when you use the targets
@@ -68,4 +80,4 @@ function blockfaultBehaviour(e) {
 }
 
 // temp handling
-templink.addEventListener('click', blockfaultBehaviour)
+templink.addEventListener('click', blockfaultBehaviour);
