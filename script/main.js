@@ -19,7 +19,7 @@ function changeBGImage() {
 
 	// change the background image in the drop zone
 	puzzleBoard.style.backgroundImage = 'url("../images/backGround"' + this.id + '".jpg")';
-	puzzleBoard.style.backgroundImage: url("../../media/examples/lizard.png");
+	puzzleBoard.style.backgroundImage = url("../../media/examples/lizard.png");
 }
 
 // event handling at the bottom -> how things react when you
